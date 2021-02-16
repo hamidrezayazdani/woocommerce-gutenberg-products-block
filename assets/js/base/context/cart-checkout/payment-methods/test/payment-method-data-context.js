@@ -15,6 +15,8 @@ import {
 	CheckoutExpressPayment,
 	SavedPaymentMethodOptions,
 } from '@woocommerce/base-components/payment-methods';
+import { default as fetchMock } from 'jest-fetch-mock';
+
 /**
  * Internal dependencies
  */
@@ -127,6 +129,7 @@ describe( 'Testing Payment Method Data Context Provider', () => {
 			if ( req.url.match( /wc\/store\/cart/ ) ) {
 				return Promise.resolve( JSON.stringify( previewCart ) );
 			}
+			return Promise.resolve( '' );
 		} );
 		// need to clear the store resolution state between tests.
 		await dispatch( storeKey ).invalidateResolutionForStore();
